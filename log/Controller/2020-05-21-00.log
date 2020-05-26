@@ -1,0 +1,50 @@
+21 мая 2020 00:20:18.800 {http-nio-8080-exec-1} INFO  Application.InputController - Input create request - user: first name: null	second name: null	birth date: null
+21 мая 2020 00:20:18.801 {http-nio-8080-exec-1} INFO  Application.InputController - Input user data contains null value fields
+21 мая 2020 00:21:49.813 {http-nio-8080-exec-1} INFO  Application.InputController - Input create request - user: first name: null	second name: null	birth date: null
+21 мая 2020 00:21:49.814 {http-nio-8080-exec-1} INFO  Application.InputController - Input user data contains null value fields
+21 мая 2020 00:31:26.368 {http-nio-8080-exec-1} INFO  Application.InputController - Input create request - user: first name: Pavel	second name: Chsitov	birth date: 08.06.1999
+21 мая 2020 00:31:26.386 {http-nio-8080-exec-1} INFO  Application.InputController - Create new user info successfully
+21 мая 2020 00:33:31.934 {http-nio-8080-exec-2} INFO  Application.InputController - Input create request - user: first name: Pavel	second name: Priluchniy	birth date: 08.06.1990
+21 мая 2020 00:33:31.952 {http-nio-8080-exec-2} INFO  Application.InputController - Create new user info successfully
+21 мая 2020 00:33:50.074 {http-nio-8080-exec-3} INFO  Application.InputController - Input read request - id: 2
+21 мая 2020 00:33:50.080 {http-nio-8080-exec-3} INFO  Application.InputController - Read user info successfully - id: 2
+21 мая 2020 00:34:01.360 {http-nio-8080-exec-4} INFO  Application.InputController - Input read request - id: 1
+21 мая 2020 00:34:01.361 {http-nio-8080-exec-4} INFO  Application.InputController - Read user info successfully - id: 1
+21 мая 2020 00:34:05.278 {http-nio-8080-exec-5} INFO  Application.InputController - Input read request - id: 3
+21 мая 2020 00:34:05.279 {http-nio-8080-exec-5} ERROR Application.InputController - User with id: 3does not exist
+21 мая 2020 00:34:16.063 {http-nio-8080-exec-6} INFO  Application.InputController - Input read all users URI request
+21 мая 2020 00:34:16.064 {http-nio-8080-exec-6} INFO  Application.InputController - read all users URI successfully
+21 мая 2020 00:35:28.475 {http-nio-8080-exec-8} INFO  Application.InputController - Input delete user data request - ID2
+21 мая 2020 00:35:28.479 {http-nio-8080-exec-8} INFO  Application.InputController - Update user info successfully
+21 мая 2020 00:35:39.271 {http-nio-8080-exec-10} INFO  Application.InputController - Input read all users URI request
+21 мая 2020 00:35:39.271 {http-nio-8080-exec-10} INFO  Application.InputController - read all users URI successfully
+21 мая 2020 00:35:47.187 {http-nio-8080-exec-1} INFO  Application.InputController - Input read request - id: 2
+21 мая 2020 00:35:47.187 {http-nio-8080-exec-1} INFO  Application.InputController - Read user info successfully - id: 2
+21 мая 2020 00:35:51.020 {http-nio-8080-exec-2} INFO  Application.InputController - Input read request - id: 1
+21 мая 2020 00:35:51.021 {http-nio-8080-exec-2} INFO  Application.InputController - Read user info successfully - id: 1
+21 мая 2020 00:36:58.989 {http-nio-8080-exec-4} INFO  Application.InputController - Input create request - user: first name: Pavel	second name: Chernov	birth date: 08.06.1973
+21 мая 2020 00:36:58.991 {http-nio-8080-exec-4} INFO  Application.InputController - Create new user info successfully
+21 мая 2020 00:37:17.331 {http-nio-8080-exec-6} INFO  Application.InputController - Input create request - user: first name: Alexsander	second name: Chernov	birth date: 08.06.1973
+21 мая 2020 00:37:17.333 {http-nio-8080-exec-6} INFO  Application.InputController - Create new user info successfully
+21 мая 2020 00:37:35.279 {http-nio-8080-exec-9} INFO  Application.InputController - Input read request - id: 1
+21 мая 2020 00:37:35.280 {http-nio-8080-exec-9} INFO  Application.InputController - Read user info successfully - id: 1
+21 мая 2020 00:37:48.270 {http-nio-8080-exec-8} INFO  Application.InputController - Input read request - id: 2
+21 мая 2020 00:37:48.270 {http-nio-8080-exec-8} INFO  Application.InputController - Read user info successfully - id: 2
+21 мая 2020 00:37:52.371 {http-nio-8080-exec-10} INFO  Application.InputController - Input read request - id: 3
+21 мая 2020 00:37:52.372 {http-nio-8080-exec-10} INFO  Application.InputController - Read user info successfully - id: 3
+21 мая 2020 00:37:55.953 {http-nio-8080-exec-1} INFO  Application.InputController - Input read request - id: 4
+21 мая 2020 00:37:55.954 {http-nio-8080-exec-1} INFO  Application.InputController - Read user info successfully - id: 4
+21 мая 2020 00:38:58.567 {http-nio-8080-exec-5} INFO  Application.InputController - Input delete user data request - ID2
+21 мая 2020 00:38:58.569 {http-nio-8080-exec-5} INFO  Application.InputController - Delete user successfully
+21 мая 2020 00:39:11.108 {http-nio-8080-exec-4} INFO  Application.InputController - Input read all users URI request
+21 мая 2020 00:39:11.109 {http-nio-8080-exec-4} INFO  Application.InputController - read all users URI successfully
+21 мая 2020 00:40:09.004 {http-nio-8080-exec-6} INFO  Application.InputController - Input create request - user: first name: Petya	second name: Petrov	birth date: 11.09.2001
+21 мая 2020 00:40:09.008 {http-nio-8080-exec-6} INFO  Application.InputController - Create new user info successfully
+21 мая 2020 00:40:18.085 {http-nio-8080-exec-7} INFO  Application.InputController - Input read all users URI request
+21 мая 2020 00:40:18.085 {http-nio-8080-exec-7} INFO  Application.InputController - read all users URI successfully
+21 мая 2020 00:40:25.688 {http-nio-8080-exec-9} INFO  Application.InputController - Input read all users URI request
+21 мая 2020 00:40:25.688 {http-nio-8080-exec-9} INFO  Application.InputController - read all users URI successfully
+21 мая 2020 00:40:29.827 {http-nio-8080-exec-8} INFO  Application.InputController - Input create request - user: first name: Petya	second name: Petrov	birth date: 11.09.2001
+21 мая 2020 00:40:29.829 {http-nio-8080-exec-8} INFO  Application.InputController - Create new user info successfully
+21 мая 2020 00:40:32.629 {http-nio-8080-exec-10} INFO  Application.InputController - Input read all users URI request
+21 мая 2020 00:40:32.629 {http-nio-8080-exec-10} INFO  Application.InputController - read all users URI successfully
