@@ -5,11 +5,10 @@ import XML.XMLHandler;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,18 +18,16 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RestController
 public class InputController
 {
+    private static Logger logger = LogManager.getLogger(InputController.class);
+
     @Value("${storagePath}")
     private String path;
     private XMLHandler xmlHandler;
 
-    private static Logger logger = LogManager.getLogger(InputController.class);
-
-    @Bean
-    @Order(1)
-    public void xmlService() throws XMLProcessException {
+    @PostConstruct
+    public void init() throws XMLProcessException {
         xmlHandler = new XMLHandler(path);
     }
-
 
     @RequestMapping(method = POST, value = "/user/{id}")
     public void create(HttpServletResponse hsr)

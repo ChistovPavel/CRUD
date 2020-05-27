@@ -6,7 +6,7 @@
     <appender name="XMLUtilAppender" class="org.apache.log4j.rolling.RollingFileAppender">
 
         <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
-            <param name="FileNamePattern" value="${LogDir}/${LogDirXMLUtil}/%d{yyyy-MM-dd-HH}.log" />
+            <param name="FileNamePattern" value="log/XMLUtil/%d{yyyy-MM-dd-HH}.log" />
         </rollingPolicy>
 
         <!--<param name="File" value="${LogDir}/${LogDirXMLUtil}/${LogFileName}.log"/>
@@ -20,7 +20,7 @@
     <appender name="ControllerAppender" class="org.apache.log4j.rolling.RollingFileAppender">
 
         <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
-            <param name="FileNamePattern" value="${LogDir}/${LogDirController}/%d{yyyy-MM-dd-HH}.log" />
+            <param name="FileNamePattern" value="log/Controller/%d{yyyy-MM-dd-HH}.log" />
         </rollingPolicy>
 
         <!--<param name="File" value="${LogDir}/${LogDirXMLUtil}/${LogFileName}.log"/>
@@ -34,7 +34,7 @@
     <appender name="XMLHandlerAppender" class="org.apache.log4j.rolling.RollingFileAppender">
 
         <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
-            <param name="FileNamePattern" value="${LogDir}/${LogDirXMLHandler}/%d{yyyy-MM-dd-HH}.log" />
+            <param name="FileNamePattern" value="log/XMLHandler/%d{yyyy-MM-dd-HH}.log" />
         </rollingPolicy>
 
         <!--<param name="File" value="${LogDir}/${LogDirXMLHandler}/${LogFileName}.log"/>
