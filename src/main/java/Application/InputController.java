@@ -186,7 +186,7 @@ public class InputController
     public void delete(@PathVariable Integer id,
                           HttpServletResponse hsr)
     {
-        logger.info("Input delete user data request - ID" + id);
+        logger.info("Input delete user data request - id " + id);
 
         if (id == null)
         {
@@ -230,7 +230,7 @@ public class InputController
                                     @RequestBody User user,
                                     HttpServletResponse hsr)
     {
-        logger.info("Input delete user data request - ID" + id);
+        logger.info(new StringBuilder("Input update user data request - id ").append(id).append("\t").append(user.toString()));
 
         if (id == null)
         {
