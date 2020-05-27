@@ -4,6 +4,9 @@ import XML.Exceptions.XMLProcessException;
 import XML.XMLHandler;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,17 +19,16 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RestController
 public class InputController
 {
-    private static XMLHandler xmlHandler;
+    @Value("${storagePath}")
+    private String path;
+    private XMLHandler xmlHandler;
 
     private static Logger logger = LogManager.getLogger(InputController.class);
 
-    static {
-        try {
-            xmlHandler = new XMLHandler("Storage.xml");
-        } catch (XMLProcessException e) {
-            logger.error("XmlHandler init exception", e);
-            System.exit(-1);
-        }
+    @Bean
+    @Order(1)
+    public void xmlService() throws XMLProcessException {
+        xmlHandler = new XMLHandler(path);
     }
 
 
