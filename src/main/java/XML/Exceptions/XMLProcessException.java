@@ -1,33 +1,36 @@
 package XML.Exceptions;
 
 import CRUD.Exceptions.CRUDException;
-import lombok.Getter;
 
-public class XMLProcessException extends CRUDException {
+/**
+ * Класс исключение, применяемый при возникновении ошибок при выполнении CRUD операция с XML хранилищем.
+ * */
+public class XMLProcessException extends CRUDException
+{
+    public static final int XML_INIT_EXCEPTION = 1;
+    public static final int XML_FORMAT_EXCEPTION = 2;
+    public static final int XML_USER_SEARCH_EXCEPTION = 3;
+    public static final int XML_UPDATE_FILE_EXCEPTION = 4;
+    public static final int XML_ATTRIBUTE_EXCEPTION = 5;
 
-    @Getter private short code;
-
-    public static final short XML_INIT_EXCEPTION = 1;
-    public static final short XML_FORMAT_EXCEPTION = 2;
-    public static final short XML_USER_SEARCH_EXCEPTION = 3;
-    public static final short XML_UPDATE_FILE_EXCEPTION = 4;
-    public static final short XML_ATTRIBUTE_EXCEPTION = 5;
-
-    public XMLProcessException(short inCode, String message)
+    public XMLProcessException(int inCode, String message)
     {
-        super(message);
-        this.code = inCode;
+        super(inCode, message);
     }
 
-    public XMLProcessException(short inCode, Throwable cause)
+    public XMLProcessException(int inCode, Throwable cause)
     {
-        super(cause);
-        this.code = inCode;
+        super(inCode, cause);
     }
 
-    public XMLProcessException(short inCode, String message, Throwable cause)
+    public XMLProcessException(int inCode, String message, Throwable cause)
     {
-        super(message, cause);
-        this.code = inCode;
+        super(inCode, message, cause);
+    }
+
+    @Override
+    public String getMessage()
+    {
+        return new StringBuilder(super.getMessage()).append("\texception code: ").append(super.getCode()).toString();
     }
 }

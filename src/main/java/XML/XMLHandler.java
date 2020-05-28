@@ -5,27 +5,32 @@ import CRUD.*;
 import XML.Util.XMLUtil;
 import XML.Exceptions.XMLProcessException;
 import lombok.Getter;
-        import lombok.Setter;
-        import org.apache.log4j.LogManager;
-        import org.apache.log4j.Logger;
-        import org.javatuples.Triplet;
-        import org.w3c.dom.Document;
-        import org.xml.sax.SAXException;
+import lombok.Setter;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.javatuples.Triplet;
+import org.springframework.stereotype.Repository;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilderFactory;
-        import javax.xml.parsers.ParserConfigurationException;
-        import javax.xml.transform.TransformerException;
-        import java.io.File;
-        import java.io.FileNotFoundException;
-        import java.io.IOException;
-        import java.util.ArrayList;
-        import java.util.List;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class XMLHandler implements CRUD {
-
+@Repository
+public class XMLHandler implements CRUD
+{
     private static Logger logger = LogManager.getLogger(XML.XMLHandler.class);
-    @Getter @Setter private String path;
     private Document xmlDocument;
+
+    @Getter
+    @Setter
+    private String path;
 
     public XMLHandler(String inPath) throws XMLProcessException
     {
@@ -47,7 +52,8 @@ public class XMLHandler implements CRUD {
     }
 
     @Override
-    public Integer create(User user) throws XMLProcessException {
+    public Integer create(User user) throws XMLProcessException
+    {
         logger.info(new StringBuilder().append("Create request -\t").append(user.toString()).toString());
 
         Integer fid = XMLUtil.checkStorage(this.xmlDocument, SupportGroups.firstNameGroup, user.getFirstName());
