@@ -19,8 +19,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.List;
 
-public class XMLUtil {
-
+/**
+ * Класс содержит набор статических методов, полезных для работы с XML хранилищем.
+ * */
+public class XMLUtil
+{
     private static Logger logger = LogManager.getLogger(XMLUtil.class);
 
     public static final String root = "Groups";
@@ -38,6 +41,25 @@ public class XMLUtil {
     public static final Integer maxIdValuePosition = 0;
     public static final Integer priorityFreeIdPosition = 1;
 
+    /**
+     * Метод для инициализации XML хранилища.
+     * <p>XML хранилище будет иметь следующую структуры:</p>
+     * <pre>
+     * {@code <Group>
+     *      <mainGroup></mainGroup> группа хранения основной информации о пользователях
+     *      <firsNameGroup></firsNameGroup> группа для хранения имен пользователей
+     *      <secondNameGroup></secondNameGroup> группа для хранения фамилий пользователей
+     *      <birthDateGroup></birthDateGroup> группа для хранения дат рождения пользователй
+     *      <MGID></MGID> группа для хранения свободных индексов в группе mainGroup
+     *      <FNID></FNID> группа для хранения свободных индексов в группе firsNameGroup
+     *      <SNID></SNID> группа для хранения свободных индексов в группе secondNameGroup
+     *      <BDID></BDID> группа для хранения свободных индексов в группе birthDateGroup
+     * </Group>}
+     * </pre>
+     * @param path путь к файлу XML хранилища.
+     * @return объект реализующий интерфейс {@link Document}, который содержит в себе XML структуру зранилища.
+     * @exception XMLProcessException throws в случае ошибки при создании XML файла.
+     * */
     public static Document initXML(String path) throws XMLProcessException
     {
         DocumentBuilder documentBuilder = null;
@@ -92,6 +114,13 @@ public class XMLUtil {
         return xmlDocument;
     }
 
+    /**
+    * Метод обнолвения файла хранилища на основе объекта реализующего интерфейс {@link Document}.
+     * @param document объект, который содержит XML хранилище, которое будет записано в файл;
+     * @param path путь к XML файлу хранилища.
+     * @exception FileNotFoundException throws в случае отсутствия файла.
+     * @exception  TransformerException throws в случае ошибки инстанцирования объект {@link Transformer}.
+    * */
     public static void writeDocument(Document document, String path) throws FileNotFoundException, TransformerException
     {
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
@@ -103,6 +132,14 @@ public class XMLUtil {
         transformer.transform(new DOMSource(document), result);
     }
 
+    /**
+     * Метод проверки наличия в определенной вспомогательной группе элемента с атрибутом, равным переданому значению.
+     * @param xmlDocument объект, который содержит XML хранилище;
+     * @param groupName объект {@link SupportGroups}, содержащий имя вспомагательной группы;
+     * @param value значение, которое нужно проверить.
+     * @return идентификатор найденного значения в соответствующей группе или null, если значение не найдено.
+     * @exception  XMLProcessException throws в случае нарушения структуры XML хранилища.
+     * */
     public static Integer checkStorage(Document xmlDocument, SupportGroups groupName, String value) throws XMLProcessException
     {
         logger.debug(new StringBuilder().append("GroupName: ").append(groupName.toString()).append("\tValue: ").append(value).toString());
@@ -131,6 +168,14 @@ public class XMLUtil {
         return id;
     }
 
+    /**
+     * Метод добавления в вспомогательную группу переданного значения.
+     * @param xmlDocument объект, который содержит XML хранилище;
+     * @param groupName объект {@link SupportGroups}, содержащий имя вспомагательной группы;
+     * @param value значение, которое нужно добавить.
+     * @return идентификатор добавленного значения в соответствую группу.
+     * @exception  XMLProcessException throws в случае нарушения структуры XML хранилища.
+     * */
     public static Integer addItemToStorage(Document xmlDocument, SupportGroups groupName, String value) throws XMLProcessException
     {
         Integer id = null;
@@ -148,6 +193,15 @@ public class XMLUtil {
         return id;
     }
 
+    /**
+     * Метод добавления в группу mainGroup переданных значений.
+     * @param xmlDocument объект, который содержит XML хранилище;
+     * @param fid идентификатор имени из вспомогательной группы firstNameGroup;
+     * @param sid идентификатор фамилии из вспомогательной группы secondNameGroup;
+     * @param bid идентификатор даты рождения из вспомогательной группы birthDateGroup.
+     * @return идентификатор добавленного значения в группу mainGroup.
+     * @exception  XMLProcessException throws в случае нарушения структуры XML хранилища.
+     * */
     public static Integer addItemToStorage(Document xmlDocument, Integer fid, Integer sid, Integer bid) throws XMLProcessException {
 
         Integer id = getFreeId(xmlDocument, IDGroups.MGID);
@@ -165,6 +219,13 @@ public class XMLUtil {
         return id;
     }
 
+    /**
+     * Метод поиска группы в XML хранилище по заданному имени.
+     * @param xmlDocument объект, который содержит XML хранилище;
+     * @param groupName строка {@link String}, содержащая имя искомой группы.
+     * @return объект, реализующий интерфейс {@link Node}, который указывает на искому группу в XML хранилище.
+     * @exception  XMLProcessException throws в случае нарушения структуры XML хранилища или отсутсвия искомой группы.
+     * */
     private static Node findGroup(Document xmlDocument, String groupName) throws XMLProcessException {
         NodeList groups = xmlDocument.getDocumentElement().getChildNodes();
 
@@ -199,6 +260,14 @@ public class XMLUtil {
         throw ex;
     }
 
+    /**
+     * Метод поиска информации о пользователе в группе mainGroup по заданному id.
+     * @param xmlDocument объект, который содержит XML хранилище;
+     * @param id идентификатор искомого пользователя.
+     * @return объект {@link Triplet}, который содержит идентификаторы для вспомогательных групп
+     * firstNameGroup, secondNameGroup, birthDateGroup.
+     * @exception  XMLProcessException throws в случае нарушения структуры XML хранилища или отстутсвия пользователя с заданным id.
+     * */
     public static Triplet<Integer, Integer, Integer> getUser(Document xmlDocument, Integer id) throws XMLProcessException {
 
         NodeList group = findGroup(xmlDocument, mainGroup).getChildNodes();
@@ -234,9 +303,14 @@ public class XMLUtil {
         throw ex;
     }
 
+    /**
+     * Метод извлечения идентификатор всех пользователей из группу mainGroup.
+     * @param xmlDocument объект, который содержит XML хранилище;
+     * @param holdersId объект, реализующий интерфейс {@link List}, в который будут помещены идентификаторы пользователей.
+     * @exception  XMLProcessException throws в случае нарушения структуры XML хранилища.
+     * */
     public static void getAllUsersId(Document xmlDocument, List<Integer> holdersId) throws XMLProcessException
     {
-
         NodeList group = findGroup(xmlDocument, mainGroup).getChildNodes();
 
         for (int i = 0; i < group.getLength(); i++)
@@ -249,6 +323,15 @@ public class XMLUtil {
         }
     }
 
+    /**
+     * Метод извлечения идентификатор всех пользователей из группу mainGroup по заданным параметрам.
+     * @param xmlDocument объект, который содержит XML хранилище;
+     * @param holdersId объект, реализующий интерфейс {@link List}, в который будут помещены идентификаторы пользователей;
+     * @param parameters объект {@link User}, который содержит параметры, по которым будет производиться поиск.
+     *                   Некоторые атрибуты могут быть null. В выходной список добавляются идентификаторы тех пользователей,
+     *                   данные которых совпали с соответствующими ненулевыми атрибутами объекта parameters.
+     * @exception  XMLProcessException throws в случае нарушения структуры XML хранилища.
+     * */
     public static void getAllUsersIdParametrized(Document xmlDocument, List<Integer> holdersId, User parameters)
             throws XMLProcessException
     {
@@ -292,6 +375,14 @@ public class XMLUtil {
         }
     }
 
+    /**
+     * Метод получения детальной информации пользователя из вспомогательной группы по заданному id.
+     * @param xmlDocument объект, который содержит XML хранилище;
+     * @param groupName объект {@link SupportGroups}, содержащий имя вспомагательной группы;
+     * @param id идентификатор искомого значения.
+     * @return найденное строковое значение.
+     * @exception  XMLProcessException throws в случае нарушения структуры XML хранилища или остутсвия данных с искомым id.
+     * */
     public static String getUserDetail(Document xmlDocument, SupportGroups groupName, Integer id) throws XMLProcessException
     {
         NodeList group = findGroup(xmlDocument, groupName.toString()).getChildNodes();
@@ -322,14 +413,27 @@ public class XMLUtil {
         throw ex;
     }
 
-    public static void deleteUserWithCheck(Document xmlDocument, String groupName, String field, Integer id) throws XMLProcessException
+    /**
+     * Метод удаления информации пользователя из указанной группы по указанному id и имени атрибута.
+     * Перед удаление производится проверка группы mainGroup на наличие элемента, у которого атрибут с заданным именем равняется id.
+     * Если таких элементов нет, то будет броше исключение {@link XMLProcessException}.
+     * Если таких элементов несколько, то удаление не производим.
+     * Если такой элемент один, то производим удаление.
+     * @param xmlDocument объект, который содержит XML хранилище;
+     * @param groupName объект {@link SupportGroups}, содержащий имя вспомагательной группы;
+     * @param field строка {@link String}, которая содержит имя атрибута;
+     * @param id идентификатор искомого значения.
+     * @exception  XMLProcessException throws в случае нарушения структуры XML хранилища или остутсвия данных с искомым id.
+     * */
+    public static void deleteUserWithCheck(Document xmlDocument, String groupName, String field, Integer id)
+            throws XMLProcessException
     {
         Integer count = XMLUtil.groupHasValue(xmlDocument, mainGroup, field, id.toString());
 
         if (count == 0)
         {
             XMLProcessException ex = new XMLProcessException(XMLProcessException.XML_USER_SEARCH_EXCEPTION, new StringBuilder().append("The group ")
-                    .append(mainGroup)
+                    .append(mainGroup.toString())
                     .append(" must have more than zero user info with ")
                     .append(field)
                     .append(" ")
@@ -340,7 +444,7 @@ public class XMLUtil {
         else if (count != 1)
         {
             logger.debug(new StringBuilder("More that one user info found - Group: ")
-                    .append(mainGroup)
+                    .append(mainGroup.toString())
                     .append("\t")
                     .append(field).append(": ")
                     .append(id.toString())
@@ -379,6 +483,15 @@ public class XMLUtil {
         throw ex;
     }
 
+    /**
+     * Метод проверки заданной группы на наличие элемента с заданным именем атрибута и значением атрибута.
+     * @param xmlDocument объект, который содержит XML хранилище;
+     * @param groupName объект {@link SupportGroups}, содержащий имя вспомагательной группы;
+     * @param attributeName строка {@link String}, которая содержит имя атрибута.
+     * @param attributeValue проверяемое значение.
+     * @return количество подходящих элементов указанной группы.
+     * @exception  XMLProcessException throws в случае нарушения структуры XML хранилища.
+     * */
     private static Integer groupHasValue(Document xmlDocument, String groupName, String attributeName, String attributeValue)
             throws XMLProcessException
     {
@@ -406,6 +519,15 @@ public class XMLUtil {
         return counter;
     }
 
+    /**
+     * Метод обновления заданного атрибута элемента в заданной группе по заданному id.
+     * @param xmlDocument объект, который содержит XML хранилище;
+     * @param groupName объект {@link SupportGroups}, содержащий имя вспомагательной группы;
+     * @param id идентификатор элемента в заданной группе;
+     * @param attributeName строка {@link String}, которая содержит имя атрибута;
+     * @param attributeValue обновляемое значение.
+     * @exception XMLProcessException throws в случае нарушения структуры XML хранилища или отсутсвия искомого элемента.
+     * */
     public static void updateAttributeValue(Document xmlDocument, String groupName, Integer id, String attributeName, String attributeValue)
             throws XMLProcessException
     {
@@ -437,7 +559,7 @@ public class XMLUtil {
         throw ex;
     }
 
-    private static String tryGetAttribute(NamedNodeMap attributes, String attributeName) throws XMLProcessException {
+    /*private static String tryGetAttribute(NamedNodeMap attributes, String attributeName) throws XMLProcessException {
         Node node = attributes.getNamedItem(attributeName);
         if (node == null)
         {
@@ -454,13 +576,20 @@ public class XMLUtil {
         {
             logger.error(ex);
             throw new XMLProcessException(XMLProcessException.XML_ATTRIBUTE_EXCEPTION, ex);
-    }
+        }
         logger.debug(new StringBuilder("Attribute: ").append(attributeName)
                 .append("\tvalue: ")
                 .append(value).toString());
         return value;
-    }
+    }*/
 
+    /**
+     * Метод добавления свободного id в заданную группу хранилища.
+     * @param xmlDocument объект, который содержит XML хранилище;
+     * @param groupName объект {@link IDGroups}, содержащий имя группы для хранения свободных id;
+     * @param value свободный идентификатор.
+     * @exception XMLProcessException throws в случае нарушения структуры XML хранилища.
+     * */
     public static void addFreeId(Document xmlDocument, IDGroups groupName, Integer value) throws XMLProcessException
     {
         logger.debug(new StringBuilder("Set free ID to ").append(groupName.toString()).toString());
@@ -495,6 +624,13 @@ public class XMLUtil {
         logger.debug("Set free ID successfully");
     }
 
+    /**
+     * Метод получение свободного id из заданой группы хранилища.
+     * @param xmlDocument объект, который содержит XML хранилище;
+     * @param groupName объект {@link IDGroups}, содержащий имя группы для хранения свободных id.
+     * @return свободый идентификатор для соответствующей группы.
+     * @exception XMLProcessException throws в случае нарушения структуры XML хранилища.
+     * */
     public static Integer getFreeId(Document xmlDocument, IDGroups groupName) throws XMLProcessException
     {
         logger.debug(new StringBuilder("Get ID for new value from ").append(groupName.toString()).toString());

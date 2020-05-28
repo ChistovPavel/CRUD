@@ -16,7 +16,7 @@ import java.util.List;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 /**
- * Класс, который занимается приемом входящих http запросов, обрабатывает их и формирует ответ
+ * Класс, который занимается приемом входящих http запросов, обрабатывает их и формирует ответ.
  * */
 @RestController
 public class InputController
@@ -26,8 +26,7 @@ public class InputController
     private CRUD xmlHandler;
 
     /**
-     * Конструктор класса
-     * Путь к XML файлу взят из файла application.properties
+     * Конструктор класса.
      * */
     public InputController()
     {

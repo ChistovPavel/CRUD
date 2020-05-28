@@ -22,6 +22,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс для работы с XML хранилищем. Позволяет осуществлять основные CRUD операции в хранилище.
+ * */
 @Repository
 public class XMLHandler implements CRUD
 {
@@ -32,6 +35,11 @@ public class XMLHandler implements CRUD
     @Setter
     private String path;
 
+    /**
+     * Конструктор класса.
+     * @param inPath путь к XML файлу хранилища.
+     * @exception XMLProcessException throws в случае ошибки инициализации XML хранилища или в случае ошибки открытия XML файла.
+     * */
     public XMLHandler(String inPath) throws XMLProcessException
     {
         this.path = inPath;
@@ -51,6 +59,11 @@ public class XMLHandler implements CRUD
         }
     }
 
+    /**
+     * Определение метода интерфейса {@link CRUD} для добовление нового пользователя в хранилище.
+     * Более подробное описание можно получить в {@link CRUD#create(User)}.
+     * @exception XMLProcessException throws в случае ошибки при работе с XML файлом во время добовления нового пользователя.
+     * */
     @Override
     public Integer create(User user) throws XMLProcessException
     {
@@ -89,6 +102,11 @@ public class XMLHandler implements CRUD
         return id;
     }
 
+    /**
+     * Определение метода интерфейса {@link CRUD} для получения информации о всех пользователях.
+     * Более подробное описание можно получить в {@link CRUD#read()}.
+     * @exception XMLProcessException throws в случае ошибки при работе с XML файлом во время получения данных пользователей.
+     * */
     @Override
     public List<Integer> read() throws XMLProcessException
     {
@@ -102,6 +120,11 @@ public class XMLHandler implements CRUD
         return usersId;
     }
 
+    /**
+     * Определение метода интерфейса {@link CRUD} для получения информации о пользователях по заданным параметрам.
+     * Более подробное описание можно получить в {@link CRUD#read(User)}.
+     * @exception XMLProcessException throws в случае ошибки при работе с XML файлом во время получения данных пользователей.
+     * */
     @Override
     public List<Integer> read(User parameters) throws XMLProcessException
     {
@@ -131,6 +154,12 @@ public class XMLHandler implements CRUD
         return usersId;
     }
 
+    /**
+     * Определение метода интерфейса {@link CRUD} для получения информации о пользователе по заданному id.
+     * Более подробное описание можно получить в {@link CRUD#read(Integer)}.
+     * @exception XMLProcessException throws в случае ошибки при работе с XML файлом во время получения данных пользователя
+     * или в случае остутсвия данных рассматриваемого пользователя.
+     * */
     @Override
     public User read(Integer id) throws XMLProcessException
     {
@@ -149,6 +178,12 @@ public class XMLHandler implements CRUD
         return user;
     }
 
+    /**
+     * Определение метода интерфейса {@link CRUD} для удаления информации о пользователе из хранилища по заданному id.
+     * Более подробное описание можно получить в {@link CRUD#delete(Integer)}.
+     * @exception XMLProcessException throws в случае ошибки при работе с XML файлом во время удаления данных пользователя
+     * или в случае остутсвия данных рассматриваемого пользователя.
+     * */
     @Override
     public void delete(Integer id) throws XMLProcessException
     {
@@ -174,6 +209,12 @@ public class XMLHandler implements CRUD
         logger.info(new StringBuilder().append("Delete successfully ID: ").append(id.toString()).toString());
     }
 
+    /**
+     * Определение метода интерфейса {@link CRUD} для обновления информации о пользователе по заданному id.
+     * Более подробное описание можно получить в {@link CRUD#update(Integer, User)}.
+     * @exception XMLProcessException throws в случае ошибки при работе с XML файлом во время обновления данных пользователя
+     * или в случае остутсвия данных рассматриваемого пользователя.
+     * */
     @Override
     public User update(Integer id, User newUserInfo)
             throws XMLProcessException
