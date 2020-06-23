@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="XMLUtilAppender" class="org.apache.log4j.rolling.RollingFileAppender">
+
+        <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <param name="FileNamePattern" value="log/XMLUtil/%d{yyyy-MM-dd-HH}.log" />
+        </rollingPolicy>
+
+        <!--<param name="File" value="${LogDir}/${LogDirXMLUtil}/${LogFileName}.log"/>
+        <param name="append" value="true"/>-->
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{dd MMM yyyy HH:mm:ss.SSS} {%t} %-5p %c - %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="ControllerAppender" class="org.apache.log4j.rolling.RollingFileAppender">
+
+        <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <param name="FileNamePattern" value="log/Controller/%d{yyyy-MM-dd-HH}.log" />
+        </rollingPolicy>
+
+        <!--<param name="File" value="${LogDir}/${LogDirXMLUtil}/${LogFileName}.log"/>
+        <param name="append" value="true"/>-->
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{dd MMM yyyy HH:mm:ss.SSS} {%t} %-5p %c - %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="XMLHandlerAppender" class="org.apache.log4j.rolling.RollingFileAppender">
+
+        <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <param name="FileNamePattern" value="log/XMLHandler/%d{yyyy-MM-dd-HH}.log" />
+        </rollingPolicy>
+
+        <!--<param name="File" value="${LogDir}/${LogDirXMLHandler}/${LogFileName}.log"/>
+        <param name="append" value="true"/>-->
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{dd MMM yyyy HH:mm:ss.SSS} {%t} %-5p %c - %m%n" />
+        </layout>
+    </appender>
+
+    <logger name="util.XMLUtil">
+        <level value="TRACE" />
+        <appender-ref ref="XMLUtilAppender" />
+    </logger>
+    <logger name="xml.XMLHandler">
+        <level value="TRACE" />
+        <appender-ref ref="XMLHandlerAppender" />
+    </logger>
+    <logger name="application.InputController">
+        <level value="TRACE" />
+        <appender-ref ref="ControllerAppender" />
+    </logger>
+
+</log4j:configuration>
